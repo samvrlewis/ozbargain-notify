@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.renderscript.RenderScript;
 import android.support.v4.app.NotificationCompat;
@@ -48,7 +50,11 @@ public class PushReceiver extends ParsePushBroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setContentTitle("New OzBargain Deal");
         builder.setContentText(title);
-        builder.setSmallIcon(R.drawable.ic_stat_name);
+        builder.setSmallIcon(R.drawable.ic_shopping);
+
+        //in the future this could be from the deal image
+        //Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_shopping);
+        //builder.setLargeIcon(largeIcon);
         builder.setAutoCancel(true);
         builder.setColor(Color.argb(0, 226, 70, 55));
         //builder.setPriority(1); //high priority

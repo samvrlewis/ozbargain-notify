@@ -97,7 +97,7 @@ public class SettingsActivity extends Activity {
 
             case R.id.over_100:
                 if (checked) {
-                    updated = subscribeTo("over_100");
+                    updated = subscribeTo("devel");
                     text = "Will notify for deals with a score greater than 100.";
                     editor.putInt(SETTINGS_NAME, R.id.over_100);
                 }

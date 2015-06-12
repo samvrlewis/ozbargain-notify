@@ -14,9 +14,12 @@
       IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
       to match your app's package name + ".permission.C2D_MESSAGE".
     -->
-    <permission android:protectionLevel="signature"
-        android:name="me.samlewis.ozbargainnotify.permission.C2D_MESSAGE" />
+    <permission
+        android:name="me.samlewis.ozbargainnotify.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="me.samlewis.ozbargainnotify.permission.C2D_MESSAGE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -24,9 +27,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:versionCode="1"
-        android:versionName="alpha">
+        android:versionName="alpha" >
+        <meta-data
+            android:name="com.parse.push.notification_icon"
+            android:resource="@drawable/ic_stat_name" />
 
-        <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/ic_stat_name"/>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/app_name" >
@@ -38,13 +43,28 @@
         </activity>
 
         <service android:name="com.parse.PushService" />
-        <receiver android:name="com.parse.ParseBroadcastReceiver">
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver"
+
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+<!--                   IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
+                <category android:name="me.samlewis.ozbargainnotify" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".PushReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
@@ -52,18 +72,11 @@
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <!--
-                  IMPORTANT: Change "com.parse.starter" to match your app's package name.
-                -->
-                <category android:name="me.samlewis.ozbargainnotify" />
-            </intent-filter>
-        </receiver>
+        <activity
+            android:name=".DealsListingActivity"
+            android:label="@string/title_activity_deals_listing" >
+        </activity>
     </application>
 
 </manifest>

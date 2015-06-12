@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp">
+
+    <TextView
+        style="?android:attr/listSeparatorTextViewStyle"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notify me about"
+        android:id="@+id/textView" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/deals_rg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:checkedButton="0">
+        <RadioButton android:id="@+id/all_deals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All frontpage deals"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/over_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deals with more than 50 votes"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/over_100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deals with more than 100 votes"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+    <TextView
+        style="?android:attr/listSeparatorTextViewStyle"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Not associated with OzBargain. Please email any problems, suggestions or questions to sam.vr.lewis@gmail.com."
+        android:id="@+id/textView3"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" />
+
+</LinearLayout>

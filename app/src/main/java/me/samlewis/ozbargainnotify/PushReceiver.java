@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -17,9 +18,17 @@ import org.json.JSONObject;
 import org.json.JSONException;
 import android.net.Uri;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class PushReceiver extends ParsePushBroadcastReceiver {
 
     public static final String PARSE_DATA_KEY = "com.parse.Data";
+    public static final String PREFS_NAME = "subscribed_channel";
+
+    private final static AtomicInteger c = new AtomicInteger(0);
+    public static int getID() {
+        return c.incrementAndGet();
+    }
 
     @Override
     protected Notification getNotification(Context context, Intent intent) {
@@ -57,19 +66,37 @@ public class PushReceiver extends ParsePushBroadcastReceiver {
         //builder.setLargeIcon(largeIcon);
         builder.setAutoCancel(true);
         builder.setColor(Color.argb(0, 226, 70, 55));
-        //builder.setPriority(1); //high priority
-        builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE);
+        builder.setPriority(Notification.PRIORITY_DEFAULT); //high priority
+
+        int defaults = 0;
+
+        SharedPreferences settings = context.getSharedPreferences(SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE);
+        boolean vibrate = settings.getBoolean(SettingsActivity.VIBRATION_NAME, true);
+        boolean sound = settings.getBoolean(SettingsActivity.SOUND_NAME, true);
+        boolean LED = settings.getBoolean(SettingsActivity.LED_NAME, true);
+
+        if (LED) {
+            defaults = defaults | Notification.DEFAULT_LIGHTS;
+        }
+        if (sound) {
+            defaults = defaults | Notification.DEFAULT_SOUND;
+        }
+        if (vibrate) {
+            defaults = defaults | Notification.DEFAULT_VIBRATE;
+        }
+
+        builder.setDefaults(defaults);
         //builder.setLights(Color.argb(0, 255, 255, 255)); //white
+
         Intent resultIntent = new Intent(Intent.ACTION_VIEW);
         resultIntent.setData(Uri.parse(url));
-
         PendingIntent pending = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_ONE_SHOT);
         builder.setContentIntent(pending);
 
         // TODO: Set a sound and allow this to be customised
         //builder.setSound(soundUri);
 
-        notificationManager.notify("MyTag", 0, builder.build());
+        notificationManager.notify("OzBargainNotify", getID(), builder.build());
     }
 
     private JSONObject getDataFromIntent(Intent intent) {

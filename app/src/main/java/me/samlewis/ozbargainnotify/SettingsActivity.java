@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
@@ -24,6 +25,10 @@ public class SettingsActivity extends Activity {
 
     public static final String PREFS_NAME = "subscribed_channel";
     public static final String SETTINGS_NAME = "channel_int";
+    public static final String VIBRATION_NAME = "vibration_notify";
+    public static final String SOUND_NAME = "sound_notify";
+    public static final String LED_NAME = "led_notify";
+
 
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
@@ -35,10 +40,12 @@ public class SettingsActivity extends Activity {
         {
             //subscribe to all deals
             subscribeTo("all_deals");
-
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editorRG = settings.edit();
             editorRG.putInt(SETTINGS_NAME, R.id.all_deals);
+            editorRG.putBoolean(VIBRATION_NAME, true);
+            editorRG.putBoolean(SOUND_NAME, true);
+            editorRG.putBoolean(LED_NAME, true);
             editorRG.commit();
 
         }
@@ -47,7 +54,17 @@ public class SettingsActivity extends Activity {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         int preference = settings.getInt(SETTINGS_NAME, R.id.all_deals);
 
+        Switch sw_vibrate = (Switch) findViewById(R.id.switch_vibrate);
+        sw_vibrate.setChecked(settings.getBoolean(VIBRATION_NAME, true));
+
+        Switch sw_sound = (Switch) findViewById(R.id.switch_sound);
+        sw_sound.setChecked(settings.getBoolean(SOUND_NAME, true));
+
+        Switch sw_led = (Switch) findViewById(R.id.switch_led);
+        sw_led.setChecked(settings.getBoolean(LED_NAME, true));
+
         rg.check(preference);
+
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 
@@ -68,6 +85,31 @@ public class SettingsActivity extends Activity {
             }
         }
         return firstTime;
+    }
+
+    //TODO: This is horrible, fix it up
+    public void switchLED(View view) {
+        boolean on = ((Switch) view).isChecked();
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editorRG = settings.edit();
+        editorRG.putBoolean(LED_NAME, on);
+        editorRG.commit();
+    }
+
+    public void switchSound(View view) {
+        boolean on = ((Switch) view).isChecked();
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editorRG = settings.edit();
+        editorRG.putBoolean(SOUND_NAME, on);
+        editorRG.commit();
+    }
+
+    public void switchVibrate(View view) {
+        boolean on = ((Switch) view).isChecked();
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editorRG = settings.edit();
+        editorRG.putBoolean(VIBRATION_NAME, on);
+        editorRG.commit();
     }
 
     public void onRadioButtonClicked(View view) {
@@ -97,7 +139,7 @@ public class SettingsActivity extends Activity {
 
             case R.id.over_100:
                 if (checked) {
-                    updated = subscribeTo("devel");
+                    updated = subscribeTo("over_100");
                     text = "Will notify for deals with a score greater than 100.";
                     editor.putInt(SETTINGS_NAME, R.id.over_100);
                 }

@@ -43,6 +43,42 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Notification Settings"
+        android:id="@+id/textView4" />
+
+    <Switch
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notification LED"
+        android:id="@+id/switch_led"
+        android:checked="true"
+        android:onClick="switchLED"/>
+
+    <Switch
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vibration"
+        android:id="@+id/switch_vibrate"
+        android:checked="true"
+        android:onClick="switchVibrate"/>
+
+    <Switch
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Alert sound"
+        android:id="@+id/switch_sound"
+        android:checked="true"
+        android:onClick="switchSound"/>
+
+    <TextView
+        style="?android:attr/listSeparatorTextViewStyle"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="About"
         android:id="@+id/textView2" />
 

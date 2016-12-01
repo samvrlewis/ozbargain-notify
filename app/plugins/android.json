@@ -1,0 +1,34 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "me.samlewis.ozbargainnotify"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "me.samlewis.ozbargainnotify"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "me.samlewis.ozbargainnotify"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "me.samlewis.ozbargainnotify"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "me.samlewis.ozbargainnotify"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "me.samlewis.ozbargainnotify"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "987757989249",
+            "PACKAGE_NAME": "me.samlewis.ozbargainnotify"
+        }
+    },
+    "dependent_plugins": {}
+}

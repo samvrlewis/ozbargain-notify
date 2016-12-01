@@ -1,0 +1,12 @@
+/* override radio button display with custom icon for both states */
+.item-radio input ~ .radio-icon {
+    visibility: visible !important;
+}
+
+.item-radio > .radio-icon:before {
+    content: "\f3a6" !important; /*deselected - Ionic class = ion-android-radio-button-off */
+}
+
+.item-radio > input[type=radio]:checked ~ .radio-icon:before {
+    content: "\f3a7" !important; /*selected Ionic class = ion-android-radio-button-on */
+}

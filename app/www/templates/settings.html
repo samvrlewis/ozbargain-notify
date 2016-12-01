@@ -1,0 +1,43 @@
+<ion-view view-title="<b>OzBargain Notify</b>">
+  <ion-content>
+
+    <div class="list">
+
+      <div class="item item-divider">
+        <b>Push Notification Subscription</b>
+      </div>
+
+      <ion-radio ng-model="notification_choice.choice" ng-value="'all_deals'", ng-change="notificationChange()">All frontpage deals</ion-radio>
+      <ion-radio ng-model="notification_choice.choice" ng-value="'over_50'" ng-change="notificationChange()"> Deals with over 50 votes</ion-radio>
+      <ion-radio ng-model="notification_choice.choice" ng-value="'over_100'" ng-change="notificationChange()">Deals with over 100 votes</ion-radio>
+
+      <!-- see here: http://stackoverflow.com/questions/31514750/checkboxes-like-radio-buttons-in-angular-and-ionic -->
+      <!--
+      <div class="item item-divider">
+        <b>Notification Settings</b>
+      </div>
+      
+      <ion-list>
+        <ion-checkbox class="item-checkbox-right" ng-model="settings.sound">
+          Sound
+        </ion-checkbox>
+        <ion-checkbox class="item-checkbox-right" ng-model="settings.vibration">
+          Vibration
+        </ion-checkbox>
+        <ion-checkbox class="item-checkbox-right" ng-model="settings.led">
+          Notification LED
+        </ion-checkbox>
+      </ion-list>
+      -->
+
+      <div class="item item-divider">
+        <b>About</b>
+      </div>
+      <div class="item item-text-wrap">
+        Not associated with OzBargain. Please email all problems, suggestions and questions to <b>sam.vr.lewis@gmail.com</b>.
+      </div>
+    </div>
+
+    </div>
+  </ion-content>
+</ion-view>

@@ -25,3 +25,8 @@ proguard/
 
 # Log Files
 *.log
+
+keys.js
+node_modules
+.serverless
+.npmignore

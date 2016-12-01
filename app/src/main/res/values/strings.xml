@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">OzBargain Notify</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_deals_listing">DealsListingActivity</string>
-</resources>

@@ -41,7 +41,7 @@ var save_deal = function (deal) {
 var notify_deal = function (deal, channel) {
     var message = new gcm.Message({
         data: {
-            title: deal.title,
+            message: deal.title,
             notId: deal.id,
             url_intent: "https://www.ozbargain.com.au/node/" + deal.id,
             ledColor: [0, 0, 255, 0]

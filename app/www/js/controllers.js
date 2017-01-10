@@ -32,7 +32,7 @@ angular.module('starter.controllers', ['ionic'])
           senderID: "987757989249",
           sound: false,
           vibrate: false,
-          icon: "ic_stat_action_shopping_cart"
+          icon: "notify"
         }
       });
 

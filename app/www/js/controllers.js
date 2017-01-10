@@ -19,7 +19,7 @@ angular.module('starter.controllers', ['ionic'])
       /* Provide a copy of the channels to unsub from */
       notifications.unsubscribeFromTopics($scope.push, $scope.channels.slice(0), function () {
         $scope.push.subscribe($scope.notification_choice.choice, function () {
-          $ionicPopup.alert({title: "Sucessfully subscribed"});
+          $ionicPopup.alert({title: "Successfully subscribed"});
           $ionicLoading.hide();
         }, function (error) {
           $ionicPopup.alert({title: "Error registering for topic"});

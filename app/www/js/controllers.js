@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic'])
 
-  .controller('SettingsCtrl', function ($scope, notifications) {
+  .controller('SettingsCtrl', function ($scope, notifications, $ionicLoading, $ionicPopup) {
     $scope.settings = {
       vibration: true,
       sound: true,
@@ -14,13 +14,16 @@ angular.module('starter.controllers', ['ionic'])
     $scope.notificationChange = function () {
       console.log($scope.notification_choice);
       localStorage.setItem("notification_choice", $scope.notification_choice.choice);
+      $ionicLoading.show();
 
       /* Provide a copy of the channels to unsub from */
       notifications.unsubscribeFromTopics($scope.push, $scope.channels.slice(0), function () {
         $scope.push.subscribe($scope.notification_choice.choice, function () {
-          console.log("Sucessfully subscribed")
+          $ionicPopup.alert({title: "Sucessfully subscribed"});
+          $ionicLoading.hide();
         }, function (error) {
-          alert("Error registering for topic");
+          $ionicPopup.alert({title: "Error registering for topic"});
+          $ionicLoading.hide();
         });
       });
     }
@@ -44,11 +47,9 @@ angular.module('starter.controllers', ['ionic'])
         console.log(data);
       });
 
-      if(!localStorage.getItem("notification_choice"))
-      {
-        /* pretend that the user has chosen the default */
-        $scope.notificationChange();
-      }
+      /* pretend that the user has chosen the default */
+      $scope.notificationChange();
+      
     });
 
     if (ionic.Platform.platform() !== "linux") {

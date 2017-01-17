@@ -2,22 +2,18 @@ angular.module('starter.services', [])
 
   .factory('notifications', function () {
 
-    var unsubscribeTopics = function (push, topics, callback) {
-      if (topics.length == 0) {
-        callback("Success");
-      } else {
-          push.unsubscribe(topics.pop(), function (data) {
-          console.log("Success unsub")
+    var unsubscribeTopics = function (push, topics, callback, err_callback) {
+          push.unregister(function (data) {
+          console.log("Success unsub");
           console.log(data);
-          unsubscribeTopics(push, topics, callback);
+          callback("Success");
         }, function (data) {
-          console.log("Error unsubbing")
+          console.log("Error unsubbing");
           console.log(data);
-          unsubscribeTopics(push, topics, callback);
-        });
-      }
-    }
-
+          err_callback("Fail");
+        }, topics);
+    };
+  
     return {
       unsubscribeFromTopics: unsubscribeTopics
     };

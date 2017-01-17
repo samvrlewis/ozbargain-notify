@@ -25,11 +25,16 @@ angular.module('starter.controllers', ['ionic'])
           $ionicPopup.alert({title: "Error registering for topic"});
           $ionicLoading.hide();
         });
+      }, function(error) {
+          $ionicPopup.alert({title: "Error unsubscribing from topics prior to subscribing"});
+          $ionicLoading.hide();
       });
     }
 
     ionic.Platform.ready(function () {
       console.log(ionic.Platform.platform());
+      $ionicLoading.show();
+
       $scope.push = PushNotification.init({
         android: {
           senderID: "987757989249",
@@ -41,14 +46,16 @@ angular.module('starter.controllers', ['ionic'])
 
       $scope.push.on('registration', function (data) {
         console.log(data);
+        $ionicLoading.hide();
+
+        /* pretend that the user has chosen the default */
+        $scope.notificationChange();
       });
 
       $scope.push.on('notification', function (data) {
         console.log(data);
       });
-
-      /* pretend that the user has chosen the default */
-      $scope.notificationChange();
+      
       
     });
 

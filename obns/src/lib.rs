@@ -7,8 +7,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Deal {
-    id: String,
-    title: String,
-    votes: u32,
-    date: Option<String>,
+    pub id: String,
+    pub title: String,
+    pub votes: u32,
+    pub date: Option<String>,
 }

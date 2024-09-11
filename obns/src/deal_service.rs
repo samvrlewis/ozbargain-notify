@@ -24,7 +24,7 @@ pub struct DealService {
 fn should_notify(new_deal: &Deal, old_deal: &Option<Deal>, threshold: u32) -> bool {
     match old_deal {
         Some(old) => old.votes < threshold && new_deal.votes >= threshold,
-        None => true, // new deal
+        None => threshold == 0,
     }
 }
 
@@ -48,10 +48,13 @@ impl DealService {
                 info!("Notifying {} for deal: {}", category, deal.title);
                 self.notification_service.notify(&deal, category).await?;
                 deal_updated = true;
+            } else {
+                info!("Deal is known {}", deal.title);
             }
         }
 
         if deal_updated {
+            info!("Updating deal {}", deal.title);
             self.dynamo_repo.update_deal(&deal).await?;
         }
 

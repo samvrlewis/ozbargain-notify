@@ -1,5 +1,5 @@
 use fcm::{
-    message::{Message, Target},
+    message::{AndroidConfig, AndroidNotification, Message, Notification, Target},
     FcmClient, FcmClientError,
 };
 use log::info;
@@ -42,7 +42,6 @@ impl NotificationService {
                "message": deal.title,
                 "notId": deal.id,
                 "url_intent": format!("https://www.ozbargain.com.au/node/{}", deal.id),
-                "ledColor": [0, 0, 255, 0]
             })),
             notification: None,
             android: None,
